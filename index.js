@@ -1,5 +1,7 @@
 // // Part 1: Refactoring Old Code
 // // change cells to arrays, and it should be dynamic, another array to be a row
+// Part 2: Expanding Functionality
+// added to part 1
 
 
 let csv = "ID,Name,Occupation,Age\n42,Bruce,Knight,41\n57,Bob,Fry Cook,19\n63,Blaine,Quiz Master,58\n98,Bill,Doctor’s Assistant,26"
@@ -7,24 +9,36 @@ let csv = "ID,Name,Occupation,Age\n42,Bruce,Knight,41\n57,Bob,Fry Cook,19\n63,Bl
 // WORKS 
 let cells =[] // 4  6
 let str =""
+let rowCount = 0 // added for part 2
+let columnCount=0  // added for part 2
+let cellCount = 0  // added for part 2
+// let header = rowCount[0]; // doesn't work
+
 
 for (let i=0; i<=csv.length; i++){//i=3
     // this will log each letter individually on a different line
     let char = csv[i];
     if(char===","){
         cells.push(str) //[ ID , Name ]
+        cellCount += 1  // added for part 2
         str = "" // clears it so that the name can be a new thing
     } else if (char==="\n" || i===csv.length){
         cells.push(str)
         console.log(cells)
+        rowCount+= 1  // added for part 2
+        cellCount+=1  // added for part 2
         str=""
-        cells =[]
+        cells =[]        
     } else {
         str+= char //Name
     }
 }
+columnCount = cellCount/rowCount  // added for part 2
+console.log(`Row count: ${rowCount}`);  // added for part 2
+console.log(`Column count: ${columnCount}`);  // added for part 2
+console.log(`Cell count: ${cellCount}`);  // added for part 2
 
-// //  ------------- easiest way to write it
+// //  ------------- easiest way to write PART 1 -- simplified
 // let rows2 = csv.split("\n") // list of strings - 5 rows
 
 // for (let j=0; j<rows2.length; j++){
@@ -33,33 +47,6 @@ for (let i=0; i<=csv.length; i++){//i=3
 //     console.log(cells)
 // }
 
-
-
-// Part 2: Expanding Functionality
-// uses same CSV file
-// let results = [];
-// let currentRow = "";
-// let currentCell ="";
-// let columnCount =0;
-
-// for (let i = 0; i <= csv.length; i++) {
-//     let char = csv[i] || "\n"; 
-//     if (char === "," || char === "\n") {
-//         if (!results[rowCount]) results[rowCount] = [];
-//         results[rowCount].push(currentCell.trim());
-//         currentCell = ""; 
-//         if (char === "\n") {
-//             rowCount++;
-//             if (rowCount === 1 && results[0].length > columnCount) {
-//                 columnCount = results[0].length;
-//             }
-//         } else {
-//           currentCell += char;
-//         }
-//       }
-      
-//       console.log("Parsed CSV as a 2D array:", results);
-      
 // Part 3: Transforming Data
 // let parsedCSV = [
 //     ["ID", "Name", "Occupation", "Age"],
